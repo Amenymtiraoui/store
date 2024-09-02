@@ -1,0 +1,12 @@
+/* Cibler les titres des onglets dans le TabView */
+.p-tabview .p-tabview-nav .p-tabview-nav-list .p-tabview-nav-item .p-tabview-nav-link {
+    color: #d9006c !important; /* Couleur fuchsia pour les titres */
+    font-weight: bold !important; /* Texte en gras */
+    text-decoration: none !important; /* Pas de soulignement */
+}
+
+/* Cibler les titres des onglets au survol */
+.p-tabview .p-tabview-nav .p-tabview-nav-list .p-tabview-nav-item .p-tabview-nav-link:hover {
+    color: #c70039 !important; /* Couleur fuchsia plus foncée au survol */
+}
+

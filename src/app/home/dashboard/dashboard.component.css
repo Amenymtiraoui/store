@@ -1,0 +1,169 @@
+.home-container {
+    padding: 20px;
+  }
+  
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px; /* Assure qu'il n'y a pas d'espace entre les éléments */
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .menu-bar {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    margin-bottom: 0; /* Supprime l'espace en dessous de la barre de menu */
+    position: relative; /* Pour positionner les icônes correctement */
+  }
+  
+  .search-container {
+    position: relative;
+    flex: 1;
+  }
+  
+  .search-container input {
+    width: 100%;
+    padding: 10px 30px 10px 10px; /* Padding pour faire de la place pour l'icône */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+    font-size: 14px;
+  }
+  
+  .search-icon {
+    position: absolute;
+    right: 10px; /* Distance du bord droit de l'input */
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .icon-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 10px; /* Espace entre la barre de recherche et les icônes */
+  }
+  
+  .icon-container span {
+    font-size: 18px;
+    color: #333;
+  }
+  
+  .cards-container {
+    display: flex;
+    flex-wrap: nowrap; /* Assure que les cartes restent sur une seule ligne */
+    gap: 10px; /* Espacement entre les cartes */
+    margin-top: 0; /* Réduit l'espace au-dessus des cartes */
+    .card
+    {
+        width: 350px;
+    }
+  }
+
+ .ventes_container
+ {
+    display: flex;
+    flex-direction: row;
+    .col-12
+    {
+        width: 63%;
+    }
+
+ }
+
+ .charts{
+    display: flex;
+    flex-direction: row;
+    .donghunt_chart
+    {
+      width: 37%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .chart-container{
+        display: block;
+        box-sizing: border-box;
+        width: 800px;
+        height: 400px;
+     }
+ }
+
+  .card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 8px; /* Padding à l'intérieur de la carte */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column; /* Aligner les éléments verticalement */
+    background-color: #f9f9f9;
+    margin-bottom: 0; /* Supprime l'espace en dessous des cartes */
+  }
+  
+  .card img {
+    width: 40px; /* Ajuste la taille de l'image */
+    height: 40px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 10px;
+  }
+  
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centrer le contenu horizontalement */
+  }
+  
+  .card-content h3 {
+    margin: 0;
+    font-size: 16px;
+  }
+  
+  .card-content .description {
+    margin-top: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .menu_container
+  {
+    display: flex;
+    flex-direction: row;
+  }
+ 
+  @media (max-width: 768px) {
+    .card {
+      width: calc(50% - 10px);
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .card {
+      width: 100%; 
+    }
+  }
+ 
+  .sales-dashboard {
+    margin: 20px;
+}
+
+.table {
+    width: 100%;
+    max-width: 100%; 
+}
+
+.table th, .table td {
+    text-align: center;
+}
+
+.table img {
+    border-radius: 4px;
+}
+  

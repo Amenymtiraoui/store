@@ -1,0 +1,171 @@
+/* Styles pour la ligne horizontale avec les éléments */
+.top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    border-bottom: 1px solid #ccc; /* Ligne fine en bas de la barre */
+    background-color: #fff; /* Couleur de fond de la barre */
+}
+
+.add-button {
+    background-color: #1f052f; /* Couleur de fond du bouton */
+    color: #fff; /* Couleur du texte du bouton */
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem; /* Taille de la police du bouton */
+}
+
+.add-icon {
+    font-size: 1rem; /* Taille du symbole + */
+    margin-right: 5px; /* Espacement entre le symbole + et le texte */
+}
+
+.title {
+    font-size: 1.2rem; /* Taille de la police du titre */
+    color: #333; /* Couleur du texte du titre */
+    margin: 0; /* Supprimer les marges par défaut */
+    text-align: left; /* Aligner le texte à gauche */
+}
+/* Styles pour la table personnalisée */
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.custom-table th, .custom-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.custom-table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+.custom-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.custom-table tr:hover {
+    background-color: #e2e2e2;
+}
+
+.custom-table p-sortIcon {
+    margin-left: 5px;
+    vertical-align: middle;
+}
+
+.custom-table a {
+    color: #007bff; /* Couleur du lien */
+    text-decoration: none; /* Retirer le soulignement par défaut des liens */
+}
+
+.custom-table a:hover {
+    text-decoration: underline; /* Souligner au survol */
+}
+/* Style de la boîte de dialogue de confirmation */
+.p-dialog {
+    width: 600px; /* Augmentez la largeur du dialogue */
+    max-width: 90vw; /* Ajustez la largeur maximum pour plus de flexibilité */
+    border-radius: 8px;
+  }
+  
+  .p-dialog .p-dialog-header {
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #ddd;
+    padding: 1rem;
+    font-size: 1.25rem;
+    font-weight: bold; /* Police en gras */
+  }
+  
+  .p-dialog .p-dialog-content {
+    padding: 1rem;
+  }
+  
+  .p-dialog .p-dialog-footer {
+    background-color: #f5f5f5;
+    border-top: 1px solid #ddd;
+    padding: 1rem;
+    text-align: right;
+  }
+  
+  .p-dialog .p-button {
+    margin: 0 5px;
+  }
+  
+  .p-button.pi.pi-check,
+  .p-button.pi.pi-times {
+    color: rgb(16, 3, 34);
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .p-button.pi.pi-check {
+    background-color: #add9af; /* Vert */
+  }
+  
+  .p-button.pi.pi-times {
+    background-color: #371d1b; /* Rouge */
+  }
+  
+  .p-button:hover {
+    opacity: 0.8;
+  }
+  
+  /* Styles pour les champs de formulaire */
+  .p-field {
+    margin-bottom: 1rem; /* Espacement entre les champs */
+  }
+  
+  .p-field label {
+    display: block;
+    font-weight: bold; /* Police en gras */
+    margin-bottom: 0.5rem; /* Espacement sous le label */
+  }
+  
+  .p-field input {
+    width: 100%; /* Largeur complète pour les champs de saisie */
+    padding: 0.75rem; /* Augmentez l'espacement intérieur */
+    border: 1px solid #ccc; /* Bordure */
+    border-radius: 4px; /* Coins arrondis */
+    box-sizing: border-box; /* Inclure padding et bordure dans la largeur totale */
+  }
+  
+  /* Espacement spécifique pour les boutons du pied de page */
+  .p-dialog .p-dialog-footer button:not(:last-child) {
+    margin-right: 0.5rem; /* Espacement entre les boutons */
+  }
+  .p-dialog .p-fluid .p-field {
+    margin-bottom: 1rem;
+}
+
+.p-dialog-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+button[pButton] {
+    margin-top: 0.5rem;
+}
+.custom-dropdown .p-dropdown-label {
+    padding-right: 2rem; /* Ajoutez de l'espace pour le bouton "x" */
+  }
+  
+  .custom-dropdown .p-dropdown .p-dropdown-filter {
+    width: calc(100% - 2rem); /* Réduit la largeur pour laisser de l'espace pour le bouton "x" */
+  }
+  
+  .custom-dropdown .p-dropdown .p-dropdown-trigger {
+    right: 2rem; /* Ajuste la position du bouton déclencheur */
+  }
+  

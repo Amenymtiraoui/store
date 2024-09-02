@@ -1,0 +1,67 @@
+<div class="home-container">
+
+<div class="dashboard-container">
+  
+    <!-- Cards for Overview -->
+    <div class="cards-container">
+      <div class="card" *ngFor="let card of cards">
+        <img [src]="card.image" alt="{{card.title}}" />
+        <h3>{{card.title}}</h3>
+        <p class="description">{{card.description}}</p>
+      </div>
+    </div>
+    <!-- Chart -->
+     <div class="charts">
+        <div class="chart-container">
+            <canvas id="ordersChart"></canvas>
+        </div>
+        <div class="donghunt_chart">
+            <app-achats-pie-chart></app-achats-pie-chart>
+        </div>
+     </div>
+   
+</div>
+
+<!-- sales-dashboard.component.html -->
+    <div class="col-12">
+        <div class="card sales-dashboard overflow-auto">
+          <div class="card-body pb-0">
+            <h5 class="card-title">Tableau de Bord des Ventes</h5>
+      
+            <!-- Table for Products -->
+            <table class="table table-borderless">
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Image</th>
+                  <th scope="col">Nom</th>
+                  <th scope="col">Prix</th>
+                  <th scope="col">Stock</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Total Sales</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let product of products">
+                  <td>{{ product.id }}</td>
+                  <td><img [src]="product.image" alt="{{ product.name }}" style="width: 50px; height: auto;"></td>
+                  <td>{{ product.name }}</td>
+                  <td>{{ product.price }} DT</td>
+                  <td>{{ product.stock }}</td>
+                  <td [ngClass]="{
+                    'text-success': product.status === 'En stock',
+                    'text-danger': product.status === 'Rupture de stock',
+                    'text-warning': product.status === 'Stock bas'
+                  }">{{ product.status }}</td>
+                  <td>{{ product.totalSales }} DT</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+    </div>
+
+</div>
+
+ 
+  

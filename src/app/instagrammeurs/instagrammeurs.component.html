@@ -1,0 +1,203 @@
+<div class="top-bar">
+    <p-dropdown 
+    [options]="statuses" 
+    [(ngModel)]="selectedStatus"
+    optionLabel="label"
+    [filter]="true" 
+    filterBy="label"
+    [showClear]="true"
+    placeholder="Sélectionner un statut" 
+    styleClass="w-20rem">
+    <ng-template pTemplate="filter" let-options="options">
+        <div class="flex gap-1">
+            <div class="p-inputgroup" (click)="$event.stopPropagation()">
+                <span class="p-inputgroup-addon"><i class="pi pi-search"></i></span>
+                <input 
+                    type="text"
+                    pInputText
+                    placeholder="Filter" 
+                    [(ngModel)]="filterValue"
+                    (keyup)="customFilterFunction($event, options)" />
+            </div>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="selectedItem" let-selectedOption>
+        <div class="flex align-items-center gap-2">
+            <div>{{ selectedOption.label }}</div>
+        </div>
+    </ng-template>
+    <ng-template let-status pTemplate="item">
+        <div class="flex align-items-center gap-2">
+            <div>{{ status.label }}</div>
+        </div>
+    </ng-template>
+</p-dropdown>
+        <!-- Nouveau bouton PrimeNG -->
+        <button pButton type="button" label="Ajouter" icon="pi pi-plus" (click)="showAddDialog()"></button>
+            <!-- Dropdown pour filtrer les statuts -->
+
+      
+        <!-- Autres éléments -->
+</div>
+
+<p-table #dt [value]="users" [customSort]="true" (sortFunction)="customSort($event)" class="custom-table">
+    <ng-template pTemplate="header">
+        <tr>
+            <th pSortableColumn="id">
+                Id <p-sortIcon field="id"></p-sortIcon>
+            </th>
+            <th pSortableColumn="fullName">
+                Nom et Prénom <p-sortIcon field="fullName"></p-sortIcon>
+            </th>
+            <th pSortableColumn="adresse">
+                Adresse physique <p-sortIcon field="adresse"></p-sortIcon>
+            </th>
+            <th pSortableColumn="telephone">
+                Numéro de téléphone <p-sortIcon field="telephone"></p-sortIcon>
+            </th>
+            <th pSortableColumn="instagram">
+                Lien vers page instagram <p-sortIcon field="instagram"></p-sortIcon>
+            </th>
+            <th pSortableColumn="email">
+                Email <p-sortIcon field="email"></p-sortIcon>
+            </th>
+            <th pSortableColumn="statut">
+                Statut <p-sortIcon field="statut"></p-sortIcon>
+            </th>   
+            <th>Actions</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-user>
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.nom }} {{ user.prenom }}</td> 
+            <td>{{ user.adresse }}</td>
+            <td>{{ user.telephone }}</td>
+            <td><a [href]="user.instagram" target="_blank">{{ user.instagram }}</a></td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.statut }}</td>
+       
+        
+        <td>
+                <span class="pi pi-trash" (click)="onDelete(user.id)" title="Supprimer"></span>
+                <span class="pi pi-pen-to-square" (click)="onEdit(user.id)" title="Éditer"></span>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+<p-dialog header="Confirmation" [(visible)]="deleteDialogVisible" modal="true" [closable]="false">
+    <p>Voulez-vous vraiment supprimer cet instagrammeur ?</p>
+    <p-footer>
+      <button type="button" pButton label="Confirmer" icon="pi pi-check" (click)="confirmDelete()"></button>
+      <button type="button" pButton label="Annuler" icon="pi pi-times" (click)="cancelDelete()"></button>
+    </p-footer>
+  </p-dialog>
+<!-- Dialog d'édition -->
+<div>
+    
+  
+<p-dialog header="Modifier les informations de l'instagrammeur" [(visible)]="editDialogVisible" modal="true" [closable]="false">
+    <div class="p-fluid">
+        <div class="p-field">
+            <label for="id">ID</label>
+            <input id="id" type="text" [(ngModel)]="selectedUser.id" disabled/>
+        </div>
+        <div class="p-field">
+            <label for="nom">Nom</label>
+            <input id="nom" type="text" [(ngModel)]="selectedUser.nom"/>
+        </div>
+        <div class="p-field">
+            <label for="prenom">Prénom</label>
+            <input id="prenom" type="text" [(ngModel)]="selectedUser.prenom"/>
+        </div>
+        <div class="p-field">
+            <label for="adresse">Adresse</label>
+            <input id="adresse" type="text" [(ngModel)]="selectedUser.adresse"/>
+        </div>
+        <div class="p-field">
+            <label for="telephone">Téléphone</label>
+            <input id="telephone" type="text" [(ngModel)]="selectedUser.telephone"/>
+        </div>
+        <div class="p-field">
+            <label for="instagram">Instagram</label>
+            <input id="instagram" type="text" [(ngModel)]="selectedUser.instagram"/>
+        </div>
+        <div class="p-field">
+            <label for="email">Email</label>
+            <input id="email" type="text" [(ngModel)]="selectedUser.email"/>
+        </div>
+        <div class="p-field">
+            <label for="motdepasse">Mot de passe</label>
+            <input id="motdepasse" type="text" [(ngModel)]="selectedUser.motdepasse"/>
+        </div>
+    </div>
+    <p-footer>
+      <button type="button" pButton label="Enregistrer" icon="pi pi-check" (click)="saveEdit()"></button>
+      <button type="button" pButton label="Annuler" icon="pi pi-times" (click)="cancelEdit()"></button>
+    </p-footer>
+</p-dialog>
+<p-dialog header="Ajouter un Instagrammeur" [(visible)]="addDialogVisible" modal="true" [closable]="false">
+    <div class="p-fluid">
+        <!-- Champ pour l'image -->
+        <div class="p-field">
+            <label for="image">Image</label>
+            <input id="image" type="text" [(ngModel)]="newUser.image" placeholder="URL de l'image"/>
+        </div>
+
+        <!-- Champ pour le nom -->
+        <div class="p-field">
+            <label for="nom">Nom</label>
+            <input id="nom" type="text" [(ngModel)]="newUser.nom"/>
+        </div>
+
+        <!-- Champ pour le prénom -->
+        <div class="p-field">
+            <label for="prenom">Prénom</label>
+            <input id="prenom" type="text" [(ngModel)]="newUser.prenom"/>
+        </div>
+
+        <!-- Champ pour l'adresse -->
+        <div class="p-field">
+            <label for="adresse">Adresse</label>
+            <input id="adresse" type="text" [(ngModel)]="newUser.adresse"/>
+        </div>
+
+        <!-- Champ pour le téléphone -->
+        <div class="p-field">
+            <label for="telephone">Téléphone</label>
+            <input id="telephone" type="text" [(ngModel)]="newUser.telephone"/>
+        </div>
+
+        <!-- Champ pour le lien Instagram -->
+        <div class="p-field">
+            <label for="instagram">Instagram</label>
+            <input id="instagram" type="text" [(ngModel)]="newUser.instagram"/>
+        </div>
+
+        <!-- Champ pour l'email -->
+        <div class="p-field">
+            <label for="email">Email</label>
+            <input id="email" type="email" [(ngModel)]="newUser.email"/>
+        </div>
+
+        <!-- Champ pour le mot de passe -->
+        <div class="p-field">
+            <label for="motdepasse">Mot de Passe</label>
+            <input id="motdepasse" type="password" [(ngModel)]="newUser.motdepasse"/>
+            <button type="button" pButton label="Générer le mot de passe" icon="pi pi-key" (click)="generatePassword()"></button>
+        </div>
+
+        <!-- Champ pour la confirmation du mot de passe -->
+        <div class="p-field">
+            <label for="motdepasseConfirmation">Confirmation du Mot de Passe</label>
+            <input id="motdepasseConfirmation" type="password" [(ngModel)]="newUser.motdepasseConfirmation"/>
+        </div>
+
+        <!-- Boutons Ajouter et Annuler -->
+        <div class="p-field p-d-flex p-jc-between">
+            <button type="button" pButton label="Ajouter" icon="pi pi-check" (click)="addUser()"></button>
+            <button type="button" pButton label="Annuler" icon="pi pi-times" class="p-button-secondary" (click)="cancelAdd()"></button>
+        </div>
+    </div>
+</p-dialog>
+

@@ -1,0 +1,101 @@
+<div class="messagerie-container">
+    <header class="header">
+        <h1>Messagerie</h1>
+    </header>
+    <div class="menu-section">
+        
+        <input type="text" placeholder="Rechercher..." [(ngModel)]="searchQuery" class="search-bar"/>
+
+        
+        <div class="button-group">
+            <button (click)="toggleContacts()" class="contacts-button">Contactes</button>
+        
+        </div>
+
+    
+        <div class="separator"></div>
+
+        <!-- Liste des contacts avec checkboxes alignés sur une ligne -->
+        <div *ngIf="contactsVisible" class="contacts-menu">
+            <div class="checkbox-group">
+                <div class="checkbox-item" *ngFor="let type of contactTypes">
+                    <input type="checkbox" (change)="filterContacts(type.id)" [id]="type.id"   [checked]="selectedFilter === type.id"/>
+                    <label [for]="type.id">
+                        {{ type.label }}
+                    </label>
+                </div>
+            </div>
+        </div>
+        <!-- Liste des contacts filtrés avec image -->
+        <ul>
+            <li *ngFor="let contact of filteredContacts">
+                <img [src]="contact.imageUrl" alt="Image de {{contact.name}}" class="contact-image"/>
+                <p>{{ contact.name }}</p>
+                <span class="eye-icon" (click)="showDetails(contact)" title="Voir détails">
+                    <img src="./../../assets/eye.png" alt="Voir détails">
+                </span>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Section pour écrire et envoyer un message -->
+    <div class="message-section">
+        <!-- Afficher les messages envoyés -->
+        <div class="messages-display">
+            <div *ngFor="let msg of sentMessages" class="message-bubble">
+                <!-- Afficher l'image et le nom de l'expéditeur -->
+               
+            <div class="message-header">
+                <img [src]="msg.senderImage" alt="{{ msg.senderName }}" class="sender-image"/>
+                <strong>{{ msg.senderName }}</strong>
+            </div>
+                <p>{{ msg.text }}</p>
+                <small class="timestamp">{{ msg.timestamp | date:'shortTime' }}</small>
+            </div>
+        </div>
+        <!-- Barre avec les boutons "Envoyer" et "Upload" -->
+        <div class="actions-bar">
+            <textarea [(ngModel)]="messageText" placeholder="Écrire un message..." class="message-textarea"></textarea>
+            <label for="fileInput" class="upload-label">
+                <img src="./../../assets/upload.png" alt="Upload" class="upload-image"/>
+            </label>
+            <input type="file" (change)="onFileSelect($event)" id="fileInput" class="file-input"/>
+            <p *ngIf="selectedFileName" class="file-name">{{ selectedFileName }}</p>
+            <button (click)="sendMessage()" class="send-button">Envoyer</button>
+        </div>
+    </div>
+</div>
+
+<!-- Détails des contacts -->
+<div *ngIf="detailsVisible && selectedConatct" class="details-card">
+    <div  class="contact-card">
+        <div class="contact-card-header">
+            <img [src]="selectedConatct.imageUrl || 'assets/user.png'" alt="Image de {{selectedConatct.name}}" class="contact-detail-image"/>
+            <h3>{{ selectedConatct.name }}</h3>
+         
+        </div>
+        <div class="contact-card-body">
+            <p><strong>Nom:</strong> {{ selectedConatct.name }}</p>
+            <p><strong>ID:</strong> {{ selectedConatct.id }}</p>
+            <p><strong>Email:</strong> {{ selectedConatct.email }}</p>
+            <p><strong>Téléphone:</strong> {{ selectedConatct.phone }}</p>
+            <p><strong>Statut:</strong> {{ selectedConatct.active ? 'Actif' : 'Inactif' }}</p>
+        </div>
+    </div>
+</div>
+
+
+
+  
+  
+  
+  
+  
+
+  
+  
+  
+
+
+  
+  
