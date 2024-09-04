@@ -1,12 +1,19 @@
 /* Cibler les titres des onglets dans le TabView */
-.p-tabview .p-tabview-nav .p-tabview-nav-list .p-tabview-nav-item .p-tabview-nav-link {
-    color: #d9006c !important; /* Couleur fuchsia pour les titres */
-    font-weight: bold !important; /* Texte en gras */
-    text-decoration: none !important; /* Pas de soulignement */
+
+
+
+::ng-deep a {
+    color: #c7206e    ;
+    text-decoration: underline;
 }
 
-/* Cibler les titres des onglets au survol */
-.p-tabview .p-tabview-nav .p-tabview-nav-list .p-tabview-nav-item .p-tabview-nav-link:hover {
-    color: #c70039 !important; /* Couleur fuchsia plus foncée au survol */
+::ng-depp .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+    background: #ffffff;
+    border-color: #c7206e !important;
+    color: #c7206e !important;
 }
 
+.title {
+    /* font-size: calc(1.375rem + 1.5vw); */
+    font-size: 31px;
+}

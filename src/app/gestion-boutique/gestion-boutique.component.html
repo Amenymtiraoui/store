@@ -33,8 +33,14 @@
 <p-dialog header="Ajouter une boutique" [(visible)]="ajoutDialogue" modal="modal" width="300px">
     <form (ngSubmit)="onSubmit()" #boutiqueForm="ngForm">
         <div class="form-group">
-          <label for="image">Image de la boutique:</label>
-          <input type="file" id="image" (change)="onFileSelected($event)" class="form-control" required />
+            <div class="images_container">
+                <label for="image">Image de la boutique :</label>
+                <img class="image_container" [src]="selectedProduct.imageUrl">
+
+                <input type="file" id="image" (change)="onFileSelectedChange($event)" style="display:none;" class="form-control" [accept]="'image/*'" />
+                <div class="upload_file" (click)="triggerFileInput()"></div>
+            </div>
+         
         </div>
         
         <div class="form-group">
@@ -53,8 +59,8 @@
         </div>
         <div class="form-buttons">
             
-            <button type="submit" class="btn btn-primary">Enregistrer</button>
-            <button type="button" class="btn btn-secondary" (click)="onCancelADD()">Annuler</button>
+            <button type="submit" class="btn btn-primary fushia">Enregistrer</button>
+            <button type="button" class="btn btn-secondary fushia" (click)="onCancelADD()">Annuler</button>
         </div>
     </form>
 </p-dialog>
@@ -70,8 +76,14 @@
     <p-dialog header="Modifier une boutique" [(visible)]="isAddFormVisible" modal="modal" width="300px">
         <form (ngSubmit)="saveEdit()" #boutiqueEditForm="ngForm">
             <div class="form-group">
-                <label for="image">Image de la boutique :</label>
-                <input type="file" id="image" (change)="onFileSelected($event)" class="form-control" [accept]="'image/*'" />
+                <div class="images_container">
+                    <label for="image">Image de la boutique :</label>
+                    <img class="image_container" [src]="selectedProduct.imageUrl">
+    
+                    <input type="file" id="image" (change)="onFileSelectedChange($event)" style="display:none;" class="form-control" [accept]="'image/*'" />
+                    <div class="upload_file" (click)="triggerFileInput()"></div>
+                </div>
+             
             </div>
             
             <div class="form-group">
@@ -80,8 +92,8 @@
             </div>
     
             <div class="form-buttons">
-                <button type="submit" class="btn btn-primary">Enregistrer</button>
-                <button type="button" class="btn btn-secondary" (click)="onCancel()">Annuler</button>
+                <button type="submit" class="btn btn-primary fushia">Enregistrer</button>
+                <button type="button" class="btn btn-secondary fushia" (click)="onCancel()">Annuler</button>
             </div>
         </form>
     </p-dialog>
@@ -89,8 +101,8 @@
     <p-dialog header="Confirmation" [(visible)]="confirmationDialogVisible" modal="true" [closable]="false">
         <p>Voulez-vous vraiment supprimer cette boutique ?</p>
         <p-footer>
-            <button type="button" class="btn btn-primary"(click)="confirmDelete()">Confirmer</button>
-            <button type="button" class="btn btn-secondary" (click)="cancelAction()">Annuler</button>
+            <button type="button" class="btn btn-primary fushia"(click)="confirmDelete()">Confirmer</button>
+            <button type="button" class="btn btn-secondary fushia" (click)="cancelAction()">Annuler</button>
             
         </p-footer>
       </p-dialog>

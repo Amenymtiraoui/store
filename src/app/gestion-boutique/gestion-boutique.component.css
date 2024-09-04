@@ -44,5 +44,55 @@
     margin-left: 10px;
 }
 
+.upload_file
+{
+    background-image: url('./../../assets/pink_upload.png');
+    background-repeat: no-repeat;
+    background-size: 53px;
+    width: 100px;
+    height: 100px;
 
+    cursor: pointer;
+}
 
+.image_container
+{
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+}
+.images_container
+{
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+}
+
+.p-button {
+    background-color:  #c7206e ;
+    color: white;
+  }
+
+  ::ng-deep .fushia {
+    background-color: #c7206e;
+    color: white;
+    border-color: #c7206e;
+  }
+  
+  ::ng-deep .fushia:hover {
+    background-color: #c7206e;
+    color: white;
+    border-color: #c7206e;
+  }
+
+  ::ng-deep  .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+    background: #ffffff;
+    border-color: #c7206e;
+    color: #c7206e;
+}
+  
+
+::ng-deep a {
+    color: #c7206e    ;
+    text-decoration: underline;
+}

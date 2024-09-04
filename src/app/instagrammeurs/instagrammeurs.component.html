@@ -155,7 +155,7 @@
     <p-footer>
       <button type="button" pButton label="Confirmer" icon="pi pi-check" (click)="confirmDelete()"></button>
       <button type="button" pButton label="Annuler" icon="pi pi-times" (click)="cancelDelete()"></button>
-    </p-footer>
+    </p-footer> 
   </p-dialog>
 <!-- Dialog d'édition -->
 <div>
@@ -171,10 +171,7 @@
             <label for="nom">Nom</label>
             <input id="nom" type="text" [(ngModel)]="selectedUser.nom"/>
         </div>
-        <div class="p-field">
-            <label for="prenom">Prénom</label>
-            <input id="prenom" type="text" [(ngModel)]="selectedUser.prenom"/>
-        </div>
+       
         <div class="p-field">
             <label for="adresse">Adresse</label>
             <input id="adresse" type="text" [(ngModel)]="selectedUser.adresse"/>
@@ -201,12 +198,19 @@
       <button type="button" pButton label="Annuler" icon="pi pi-times" (click)="cancelEdit()"></button>
     </p-footer>
 </p-dialog>
+
+
 <p-dialog header="Ajouter un Instagrammeur" [(visible)]="addDialogVisible" modal="true" [closable]="false">
     <div class="p-fluid">
         <!-- Champ pour l'image -->
         <div class="p-field">
             <label for="image">Image</label>
-            <input id="image" type="text" [(ngModel)]="newUser.image" placeholder="URL de l'image"/>
+            <!-- <input id="image" type="text" [(ngModel)]="newUser.image" placeholder="URL de l'image"/> -->
+            <img *ngIf="newUser?.image" class="image_container" [src]="newUser?.image">
+            <input type="file"  id="image" (change)="onFileChange($event)" accept="image/*" style="display:none;" />
+
+            <div class="upload_file" (click)="triggerFileInput()" ></div>
+
         </div>
 
         <!-- Champ pour le nom -->

@@ -54,7 +54,7 @@ export class InstagrammeursComponent {
   confirmPassword: string = '';
   passwordChangeDialogVisible: boolean = false;
   userIdToChangePassword: number | null = null;
-
+  previewUrl : any;
 
   // Fonction pour réinitialiser le filtre
   resetFunction(options: any) {
@@ -68,6 +68,8 @@ export class InstagrammeursComponent {
     const filterValue = (event.target as HTMLInputElement).value;
     // Implémentez ici la logique de filtrage personnalisée si nécessaire
   }
+
+
   users : any =[
     {
       id: 1,
@@ -392,4 +394,27 @@ export class InstagrammeursComponent {
     this.selectedUser = {};
     this.editDialogVisible = false;
   }
+
+
+  triggerFileInput() {
+    const fileInput = document.getElementById('image') as HTMLInputElement;
+    fileInput?.click();
+  }
+// Fonction pour gérer les changements de fichiers
+onFileChange(event: Event) {
+  const input = event.target as HTMLInputElement;
+  if (input.files && input.files[0]) {
+    this.newUser.image = input.files[0];
+
+    // Créez une URL pour l'aperçu de l'image
+    const reader = new FileReader();
+    reader.onload = (e: ProgressEvent<FileReader>) => {
+      this.previewUrl = e.target?.result;
+      this.newUser.image = this.previewUrl;
+    };
+    reader.readAsDataURL(this.newUser.image);
+  }
+}
+
+
 }

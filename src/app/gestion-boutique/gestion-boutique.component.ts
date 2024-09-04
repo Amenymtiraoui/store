@@ -41,6 +41,7 @@ export class GestionBoutiqueComponent {
   isAddFormVisible: boolean = false;
   ajoutDialogue : boolean = false;
   selectedProduct : any ={};
+  previewUrl : any;
   ngOnInit() {
     this.products = [
       {id:1,nomBoutique: 'Boutique A', imageUrl: './../../assets/air.jpeg', nomInstagrammeur: 'Instagrammeur A', lien: 'https://instagram.com/PageA' },
@@ -231,6 +232,40 @@ export class GestionBoutiqueComponent {
     } else {
       console.error('Aucun utilisateur sélectionné ou ID non défini.');
     }
+  }
+
+  onFileChange(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files[0]) {
+      let blob :any = input.files[0];
+
+      // Create a preview URL
+      const reader = new FileReader();
+      reader.onload = (e: ProgressEvent<FileReader>) => {
+        this.previewUrl = e.target?.result;
+        this.newProduct.imageUrl  = this.previewUrl;
+      }
+     reader.readAsDataURL(blob);
+    }
+  }
+  onFileSelectedChange(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files[0]) {
+      let blob :any = input.files[0];
+
+      // Create a preview URL
+      const reader = new FileReader();
+      reader.onload = (e: ProgressEvent<FileReader>) => {
+        this.previewUrl = e.target?.result;
+        this.selectedProduct.imageUrl  = this.previewUrl;
+      }
+     reader.readAsDataURL(blob);
+    }
+  }
+
+  triggerFileInput() {
+    const fileInput = document.getElementById('image') as HTMLInputElement;
+    fileInput.click();
   }
 }
 
