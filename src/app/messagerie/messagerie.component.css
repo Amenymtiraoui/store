@@ -126,7 +126,7 @@ p {
 
 
 .send-button {
-    background-color: #007bff;
+    background-color: #bc3371;
     color: white;
     border: none;
     padding: 8px 16px;
@@ -136,7 +136,7 @@ p {
 }
 
 .send-button:hover {
-    background-color: #0056b3;
+    background-color: #770756;
 }
 
 .button-group {
@@ -147,8 +147,9 @@ p {
 }
 .contacts-button {
     width: 50%;
-    background-color: #130fec; /* Couleur gris foncé pour un contraste élégant */
+     /* Couleur gris foncé pour un contraste élégant */
     border: none;
+    background-color:#D62D91;
     padding: 6px 12px;
     border-radius: 5px;
     color: white;
@@ -159,7 +160,7 @@ p {
 }
 
 .contacts-button:hover {
-    background-color: #100111; /* Couleur survol pour le bouton contacts */
+    background-color: #D62D91; /* Couleur survol pour le bouton contacts */
 }
 
 .separator {

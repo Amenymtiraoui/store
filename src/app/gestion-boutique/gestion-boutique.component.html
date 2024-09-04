@@ -1,1 +1,100 @@
-<p>gestion-boutique works!</p>
+<p-table #dt [value]="products" [customSort]="true" (sortFunction)="customSort($event)" class="custom-table">
+    <ng-template pTemplate="header">
+        <tr>
+            <th pSortableColumn="nomBoutique">
+                Nom de la Boutique <p-sortIcon field="nomBoutique"></p-sortIcon>
+            </th>
+            <th>Image</th>
+            <th pSortableColumn="nomInstagrammeur">
+                Nom de l'Instagrammeur <p-sortIcon field="nomInstagrammeur"></p-sortIcon>
+            </th>
+            <th pSortableColumn="nomPageInstagram">
+                Nom de la Page Instagram <p-sortIcon field="nomPageInstagram"></p-sortIcon>
+            </th>
+            <th>Actions</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-produit>
+        <tr>
+            <td>{{ produit.nomBoutique }}</td>
+            <td><img [src]="produit.imageUrl" alt="{{ produit.nomBoutique }}" width="100"></td>
+            <td>{{ produit.nomInstagrammeur }}</td>
+            <td>{{ produit.lien }}</td>
+            <td>
+                <span class="pi pi-trash" (click)="onDelete(produit)" title="Supprimer"></span>
+                <span class="pi pi-pen-to-square" (click)="onEdit(produit)" title="Éditer"></span>
+                <span class="pi pi-plus" (click)="onAddClick()" title="Ajouter"></span>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+<!-- Formulaire d'ajout', affiché lorsqu'on clique sur "Ajouter" -->
+
+<p-dialog header="Ajouter une boutique" [(visible)]="ajoutDialogue" modal="modal" width="300px">
+    <form (ngSubmit)="onSubmit()" #boutiqueForm="ngForm">
+        <div class="form-group">
+          <label for="image">Image de la boutique:</label>
+          <input type="file" id="image" (change)="onFileSelected($event)" class="form-control" required />
+        </div>
+        
+        <div class="form-group">
+          <label for="nomBoutique">Nom de la boutique:</label>
+          <input type="text" id="nomBoutique" [(ngModel)]="newProduct.nomBoutique" name="nomBoutique" class="form-control" required />
+        </div>
+        
+        <div class="form-group">
+          <label for="nomInstagrammeur">Nom de l'instagrammeur:</label>
+          <input type="text" id="nomInstagrammeur" [(ngModel)]="newProduct.nomInstagrammeur" name="nomInstagrammeur" class="form-control" required />
+        </div>
+        
+        <div class="form-group">
+          <label for="nomPageInstagram">Lien vers la Page instagram:</label>
+          <input type="text" id="nomPageInstagram" [(ngModel)]="newProduct.lien" name="nomPageInstagram" class="form-control" required />
+        </div>
+        <div class="form-buttons">
+            
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+            <button type="button" class="btn btn-secondary" (click)="onCancelADD()">Annuler</button>
+        </div>
+    </form>
+</p-dialog>
+
+    <!-- <td>
+        <span class="pi pi-trash" (click)="onDelete(user.id)" title="Supprimer"></span>
+        <span class="pi pi-pen-to-square" (click)="onEdit(user.id)" title="Éditer"></span>
+        <span class="pi pi-plus" (click)="toggleAddForm()" title="Ajouter"></span>
+    </td> -->
+    
+    <!-- Formulaire de modification, affiché lorsqu'on clique sur "Editer" -->
+
+    <p-dialog header="Modifier une boutique" [(visible)]="isAddFormVisible" modal="modal" width="300px">
+        <form (ngSubmit)="saveEdit()" #boutiqueEditForm="ngForm">
+            <div class="form-group">
+                <label for="image">Image de la boutique :</label>
+                <input type="file" id="image" (change)="onFileSelected($event)" class="form-control" [accept]="'image/*'" />
+            </div>
+            
+            <div class="form-group">
+                <label for="nom">Nom de la boutique :</label>
+                <input type="text" id="nom" [(ngModel)]="selectedProduct.nomBoutique" name="nom" class="form-control" required />
+            </div>
+    
+            <div class="form-buttons">
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+                <button type="button" class="btn btn-secondary" (click)="onCancel()">Annuler</button>
+            </div>
+        </form>
+    </p-dialog>
+    
+    <p-dialog header="Confirmation" [(visible)]="confirmationDialogVisible" modal="true" [closable]="false">
+        <p>Voulez-vous vraiment supprimer cette boutique ?</p>
+        <p-footer>
+            <button type="button" class="btn btn-primary"(click)="confirmDelete()">Confirmer</button>
+            <button type="button" class="btn btn-secondary" (click)="cancelAction()">Annuler</button>
+            
+        </p-footer>
+      </p-dialog>
+
+
+
+

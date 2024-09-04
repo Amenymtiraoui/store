@@ -17,7 +17,8 @@
     cursor: pointer;
     display: flex;
     align-items: center;
-    font-size: 0.9rem; /* Taille de la police du bouton */
+    font-size: 0.9rem;
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888, #8e44ad);  /* Taille de la police du bouton */
 }
 
 .add-icon {
@@ -123,13 +124,15 @@
   
   /* Styles pour les champs de formulaire */
   .p-field {
-    margin-bottom: 1rem; /* Espacement entre les champs */
+    margin-bottom: 1rem;
+    /* Espacement entre les champs */
   }
   
   .p-field label {
     display: block;
     font-weight: bold; /* Police en gras */
-    margin-bottom: 0.5rem; /* Espacement sous le label */
+    margin-bottom: 0.5rem; 
+    /* Espacement sous le label */
   }
   
   .p-field input {
@@ -137,7 +140,8 @@
     padding: 0.75rem; /* Augmentez l'espacement intérieur */
     border: 1px solid #ccc; /* Bordure */
     border-radius: 4px; /* Coins arrondis */
-    box-sizing: border-box; /* Inclure padding et bordure dans la largeur totale */
+    box-sizing: border-box;
+     /* Inclure padding et bordure dans la largeur totale */
   }
   
   /* Espacement spécifique pour les boutons du pied de page */
@@ -168,4 +172,57 @@ button[pButton] {
   .custom-dropdown .p-dropdown .p-dropdown-trigger {
     right: 2rem; /* Ajuste la position du bouton déclencheur */
   }
+  .top-bar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem; /* Ajoutez un espace en dessous si nécessaire */
+}
+
+.filter-group {
+    display: flex;
+    gap: 1rem;
+    align-items: center; /* Aligne les éléments verticalement */
+    margin-left: auto; /* Pousse les filtres à droite */
+}
+
+.filters{
+  display:  flex;
+  flex-direction: row;
+  gap :5px;
+  /* margin: 20px; */
+}
+
+.p-inputgroup input {
+  width: 10rem;
+  border-color: #5d5dfe;
+  }
+.p-inputgroup {
+    display: flex;
+    align-items: center;
+}
+
+.p-inputgroup input {
+    width: 10rem; /* Ajustez la largeur des champs de filtre si nécessaire */
+}
+.btn-group
+{
+  display: flex;
+  flex-direction: row;
+  gap : 10px;
+  button{
+    border-radius: 10px;
+    background-color: #E1306C;
+  }
+}
+
+.p-field{
+  button{
+    border-radius: 10px;
+  }
+}
+.filter-icon {
+    font-size: 1.5rem; /* Ajustez la taille de l'icône si nécessaire */
+}
+
   

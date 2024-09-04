@@ -31,7 +31,49 @@
             <div>{{ status.label }}</div>
         </div>
     </ng-template>
-</p-dropdown>
+    </p-dropdown>
+
+    <div class="filters">
+        <div class="p-inputgroup">
+           
+            <input 
+                type="text"
+                pInputText
+                placeholder="Nom" 
+                [(ngModel)]="filterNom"
+                />
+        </div>
+     
+        <div class="p-inputgroup">
+         
+            <input 
+                type="text"
+                pInputText
+                placeholder="Prénom" 
+                [(ngModel)]="filterPrenom"
+                 />
+        </div>
+        <div class="p-inputgroup">
+          
+            <input 
+                type="text"
+                pInputText
+                placeholder="Téléphone" 
+                [(ngModel)]="filterTelephone"
+                 />
+        </div>
+        <div class="p-inputgroup">
+            
+            <input 
+                type="text"
+                pInputText
+                placeholder="Email" 
+                [(ngModel)]="filterEmail"
+                 />
+        </div>
+    </div>
+    <button pButton type="button" label="Effacer tout" icon="pi pi-filter-slash" (click)="clearAllFilters()" class="p-button-danger"></button>
+
         <!-- Nouveau bouton PrimeNG -->
         <button pButton type="button" label="Ajouter" icon="pi pi-plus" (click)="showAddDialog()"></button>
             <!-- Dropdown pour filtrer les statuts -->
@@ -40,7 +82,10 @@
         <!-- Autres éléments -->
 </div>
 
-<p-table #dt [value]="users" [customSort]="true" (sortFunction)="customSort($event)" class="custom-table">
+  <!-- Filtres -->
+
+
+<p-table #dt [value]="fUsers()" [customSort]="true" (sortFunction)="customSort($event)" class="custom-table">
     <ng-template pTemplate="header">
         <tr>
             <th pSortableColumn="id">
@@ -75,16 +120,36 @@
             <td>{{ user.telephone }}</td>
             <td><a [href]="user.instagram" target="_blank">{{ user.instagram }}</a></td>
             <td>{{ user.email }}</td>
-            <td>{{ user.statut }}</td>
+            <td>{{ getStatutLabel(user.statut) }}</td>
        
         
         <td>
                 <span class="pi pi-trash" (click)="onDelete(user.id)" title="Supprimer"></span>
                 <span class="pi pi-pen-to-square" (click)="onEdit(user.id)" title="Éditer"></span>
+                <span class="pi pi-key" (click)="onChangePassword(user.id)" title="Changer le mot de passe"></span>
             </td>
         </tr>
     </ng-template>
 </p-table>
+
+
+<p-dialog header="Changer le mot de passe" [(visible)]="passwordChangeDialogVisible" modal="modal" width="300px">
+    <div class="p-fluid">
+      <div class="p-field">
+        <label for="newPassword">Nouveau mot de passe</label>
+        <input id="newPassword" type="password" [(ngModel)]="newPassword" pInputText />
+      </div>
+      <div class="p-field">
+        <label for="confirmPassword">Confirmer le nouveau mot de passe</label>
+        <input id="confirmPassword" type="password" [(ngModel)]="confirmPassword" pInputText />
+      </div>
+      <p-footer>
+        <button type="button" pButton label="Annuler" icon="pi pi-times" (click)="cancelChangePassword()"></button>
+        <button type="button" pButton label="Enregistrer" icon="pi pi-check" (click)="changePassword()"></button>
+      </p-footer>
+    </div>
+  </p-dialog>
+  
 <p-dialog header="Confirmation" [(visible)]="deleteDialogVisible" modal="true" [closable]="false">
     <p>Voulez-vous vraiment supprimer cet instagrammeur ?</p>
     <p-footer>
@@ -119,7 +184,7 @@
             <input id="telephone" type="text" [(ngModel)]="selectedUser.telephone"/>
         </div>
         <div class="p-field">
-            <label for="instagram">Instagram</label>
+            <label for="instagram">Lien instagram</label>
             <input id="instagram" type="text" [(ngModel)]="selectedUser.instagram"/>
         </div>
         <div class="p-field">
@@ -194,7 +259,7 @@
         </div>
 
         <!-- Boutons Ajouter et Annuler -->
-        <div class="p-field p-d-flex p-jc-between">
+        <div class="btn-group">
             <button type="button" pButton label="Ajouter" icon="pi pi-check" (click)="addUser()"></button>
             <button type="button" pButton label="Annuler" icon="pi pi-times" class="p-button-secondary" (click)="cancelAdd()"></button>
         </div>

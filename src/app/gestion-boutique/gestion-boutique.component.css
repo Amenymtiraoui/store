@@ -1,0 +1,48 @@
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.custom-table th, .custom-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.custom-table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+.custom-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.custom-table tr:hover {
+    background-color: #e2e2e2;
+}
+
+.custom-table p-sortIcon {
+    margin-left: 5px;
+    vertical-align: middle;
+}
+
+.custom-table a {
+    color: #007bff; /* Couleur du lien */
+    text-decoration: none; /* Retirer le soulignement par défaut des liens */
+}
+
+.custom-table a:hover {
+    text-decoration: underline; /* Souligner au survol */
+}
+.form-buttons {
+    margin-top: 20px;
+    text-align: right;
+}
+
+.form-buttons button {
+    margin-left: 10px;
+}
+
+
+
