@@ -5,6 +5,7 @@ import { MessagerieComponent } from './messagerie/messagerie.component';
 import { InstagrammeursComponent } from './instagrammeurs/instagrammeurs.component';
 import { ManageInstaComponent } from './manage-insta/manage-insta.component';
 import { GestionBoutiqueComponent } from './gestion-boutique/gestion-boutique.component';
+import { DemandeEchantillonComponent } from './demande-echantillon/demande-echantillon.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' } ,
@@ -13,6 +14,7 @@ export const routes: Routes = [
     { path: 'messagerie', component:  MessagerieComponent},
     { path: 'instagrammeur', component:  InstagrammeursComponent},
     { path:'manage_insta', component:ManageInstaComponent},
-    { path:'gestion-boutique',component:GestionBoutiqueComponent}
+    { path:'gestion-boutique',component:GestionBoutiqueComponent},
+    { path: 'demande-echantillon',component: DemandeEchantillonComponent}
    
   ];

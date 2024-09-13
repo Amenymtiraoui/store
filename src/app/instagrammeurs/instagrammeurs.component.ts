@@ -183,7 +183,13 @@ export class InstagrammeursComponent {
 //     });
 // }
 
- fUsers():any[]
+
+  ngOnInit() {
+    this.initialValue = [...this.users];
+  
+  }
+
+  fUsers():any[]
   {
     return this.users.filter((user: any) => {
       return (
@@ -195,12 +201,6 @@ export class InstagrammeursComponent {
       );
     });
 }
-
-  ngOnInit() {
-    this.initialValue = [...this.users];
-  
-  }
-
 
   
   generatePassword(): string {

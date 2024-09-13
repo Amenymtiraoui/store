@@ -1,0 +1,206 @@
+<!-- Section des filtres -->
+<div class="filters">
+    <div class="p-inputgroup">
+      <input 
+        type="text"
+        pInputText
+        placeholder="Nom Instagrammeur" 
+        [(ngModel)]="filterNomInstagrammeur"
+        (ngModelChange)="onFilterChange()" 
+      />
+    </div>
+  
+    <div class="p-inputgroup">
+      <input 
+        type="text"
+        pInputText
+        placeholder="Nom Fournisseur" 
+        [(ngModel)]="filterNomFournisseur"
+        (ngModelChange)="onFilterChange()"
+      />
+    </div>
+  
+    <div class="p-inputgroup">
+      <input 
+        type="text"
+        pInputText
+        placeholder="Nom Produit" 
+        [(ngModel)]="filterNomProduit"
+        (ngModelChange)="onFilterChange()"
+      />
+    </div>
+  
+    <div class="p-inputgroup">
+      <input 
+        type="number"
+        pInputText
+        placeholder="Prix Total" 
+        [(ngModel)]="filterPrixTotal"
+        (ngModelChange)="onFilterChange()"
+      />
+    </div>
+  </div>
+  
+
+<p-table #dt [value]="products" (sortFunction)="customSort($event)" [customSort]="true">
+    <ng-template pTemplate="header">
+        <tr>
+            <th pSortableColumn="reference">
+                Référence <p-sortIcon field="reference"></p-sortIcon>
+            </th>
+            <th pSortableColumn="instagramName">
+                Nom Instagrammeur <p-sortIcon field="instagramName"></p-sortIcon>
+            </th>
+            <th pSortableColumn="productName">
+                Nom Produit <p-sortIcon field="productName"></p-sortIcon>
+            </th>
+            <th pSortableColumn="productImage">
+                Image Produit <p-sortIcon field="productImage"></p-sortIcon>
+            </th>
+            <th pSortableColumn="supplierName">
+                Nom Fournisseur <p-sortIcon field="supplierName"></p-sortIcon>
+            </th>
+            <th pSortableColumn="totalPrice">
+                Prix Total <p-sortIcon field="totalPrice"></p-sortIcon>
+            </th>
+            <th pSortableColumn="paymentStatus">
+                Paiement <p-sortIcon field="paymentStatus"></p-sortIcon>
+            </th>
+            <th pSortableColumn="status">
+                Statut 
+                <p-sortIcon field="status"></p-sortIcon>
+                    <!-- <p-dropdown [options]="statusOptions" 
+                    [(ngModel)]="selectedStatus" 
+                    (onChange)="applyFilter($event)"
+                    placeholder="Sélectionner un statut">
+                    </p-dropdown> -->
+            </th>
+            <th>
+                Actions
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+        <tr>
+            <td>{{ product.reference }}</td>
+            <td>{{ product.instagramName }}</td>
+            <td>{{ product.productName }}</td>
+            <td>
+                <img [src]="product.productImage" alt="{{ product.productName }}" class="product-image">
+            </td>
+            <td>{{ product.supplierName }}</td>
+            <td>{{ product.totalPrice | currency:'TND' }}</td>
+            <td>
+                <p-dropdown [options]="paymentOptions" 
+                            [(ngModel)]="selectedPayment" 
+                            (onChange)="applyPaymentFilter($event)" 
+                            placeholder="Sélectionner un mode de paiement">
+                </p-dropdown>
+              </td>
+            <td>
+                <p-dropdown [options]="statusOptions" 
+                [(ngModel)]="selectedStatus" 
+                (onChange)="applyFilter($event)"
+                placeholder="Sélectionner un statut">
+                </p-dropdown>
+            </td>
+              
+            <td>
+                <span class="pi pi-trash" (click)="onDelete(product.id)" title="Supprimer"></span>
+                 <span class="pi pi-plus" (click)="onAdd(product.id)" title="Ajouter"></span> 
+                 <span class="pi pi-pen-to-square" (click)="onEdit(product.id)" title="Éditer"></span> 
+            </td>
+            
+            
+        </tr>
+    </ng-template>
+</p-table>
+
+<p-dialog header="Confirmation de Suppression" [(visible)]="deleteDialogVisible" modal="true" [closable]="false">
+    <p>Êtes-vous sûr de vouloir supprimer cet échantillon ?</p>
+    <p-footer>
+        <button type="button" class="btn btn-danger"  icon="pi pi-check" (click)="confirmDelete()">Confirmer</button>
+        <button type="button" class="btn btn-secondary" icon="pi pi-times" (click)="cancelDelete()">Annuler</button>
+      </p-footer>
+</p-dialog>
+
+
+<!-- Boîte de dialogue d'ajout -->
+<p-dialog header="Ajouter un nouveau échantillon" [(visible)]="addDialogVisible" modal="true" [closable]="false">
+    <div class="p-fluid">
+      <!-- Champs du formulaire -->
+      <div class="p-field">
+        <label for="nomInstagrameur">Nom Instagrameur</label>
+        <input id="nomInstagrameur" type="text" [(ngModel)]="newEntry.instagramName"/>
+      </div>
+      <div class="p-field">
+        <label for="nomFournisseur">Nom Fournisseur</label>
+        <input id="nomFournisseur" type="text" [(ngModel)]="newEntry.supplierName"/>
+      </div>
+      <div class="p-field">
+        <label for="nomProduit">Nom Produit</label>
+        <input id="nomProduit" type="text" [(ngModel)]="newEntry.productName"/>
+      </div>
+      <div class="p-field">
+        <label for="quantite">Quantité</label>
+        <input id="quantite" type="number" [(ngModel)]="newEntry.quantite"/>
+      </div>
+      <div class="p-field">
+        <label for="adresseLivraison">Adresse Livraison</label>
+        <input id="adresseLivraison" type="text" [(ngModel)]="newEntry.adresseLivraison"/>
+      </div>
+      <div class="p-field">
+        <label for="telephone">Numéro de Téléphone</label>
+        <input id="telephone" type="text" [(ngModel)]="newEntry.telephone"/>
+      </div>
+      <div class="p-field">
+        <label for="methodePaiement">Méthode de Paiement</label>
+        <input id="methodePaiement" type="text" [(ngModel)]="newEntry.methodePaiement"/>
+      </div>
+       <!-- Boutons Ajouter et Annuler -->
+    <p-footer>
+        <button type="button" class="btn btn-primary" (click)="addEntry()">Ajouter</button>
+        <button type="button" class="btn btn-secondary" (click)="cancelAdd()">Annuler</button>
+      </p-footer>
+    </div>
+  </p-dialog>
+
+
+  <p-dialog header="Modifier un échantillon" [(visible)]="editDialogVisible" modal="true" [closable]="false">
+    <div class="p-fluid">
+
+        <div class="p-field">
+            <label for="nomInstagrameur">Nom Instagrameur</label>
+            <input id="nomInstagrameur" type="text" [(ngModel)]="newEntry.instagramName"/>
+          </div>
+          <div class="p-field">
+            <label for="nomFournisseur">Nom Fournisseur</label>
+            <input id="nomFournisseur" type="text" [(ngModel)]="newEntry.supplierName"/>
+          </div>
+          <div class="p-field">
+            <label for="nomProduit">Nom Produit</label>
+            <input id="nomProduit" type="text" [(ngModel)]="newEntry.productName"/>
+          </div>
+          <div class="p-field">
+            <label for="quantite">Quantité</label>
+            <input id="quantite" type="number" [(ngModel)]="newEntry.quantite"/>
+          </div>
+          <div class="p-field">
+            <label for="adresseLivraison">Adresse Livraison</label>
+            <input id="adresseLivraison" type="text" [(ngModel)]="newEntry.adresseLivraison"/>
+          </div>
+          <div class="p-field">
+            <label for="telephone">Numéro de Téléphone</label>
+            <input id="telephone" type="text" [(ngModel)]="newEntry.telephone"/>
+          </div>
+          <div class="p-field">
+            <label for="methodePaiement">Méthode de Paiement</label>
+            <input id="methodePaiement" type="text" [(ngModel)]="newEntry.methodePaiement"/>
+          </div>
+          <p-footer>
+          <button type="button" class="btn btn-primary" (click)="saveChanges()">Enregistrer</button>
+          <button type="button" class="btn btn-secondary" (click)="cancelEdit()">Annuler</button>
+      </p-footer>
+    </div>
+</p-dialog>
+ 
