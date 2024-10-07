@@ -92,7 +92,7 @@
                 Id <p-sortIcon field="id"></p-sortIcon>
             </th>
             <th pSortableColumn="fullName">
-                Nom et Prénom <p-sortIcon field="fullName"></p-sortIcon>
+                Nom et Prénom<p-sortIcon field="fullName"></p-sortIcon>
             </th>
             <th pSortableColumn="adresse">
                 Adresse physique <p-sortIcon field="adresse"></p-sortIcon>
@@ -115,12 +115,12 @@
     <ng-template pTemplate="body" let-user>
         <tr>
             <td>{{ user.id }}</td>
-            <td>{{ user.nom }} {{ user.prenom }}</td> 
-            <td>{{ user.adresse }}</td>
-            <td>{{ user.telephone }}</td>
-            <td><a [href]="user.instagram" target="_blank">{{ user.instagram }}</a></td>
+            <td>{{ user.name }} </td> 
+            <td>{{ user.adresse ? user.adresse : '-'}} {{user.street ? user.street: '-'}} {{user.city ? user.city: '-' }}  {{user.post_code ? user.post_code: '-'}}</td>
+            <td>{{ user.phone }}</td>
+            <td><a [href]="user.instagram" target="_blank">{{ user.acountLink ?  user.acountLink: '-'}}</a></td>
             <td>{{ user.email }}</td>
-            <td>{{ getStatutLabel(user.statut) }}</td>
+            <td>{{ getStatutLabel(user.status) }}</td>
        
         
         <td>
@@ -169,7 +169,7 @@
         </div>
         <div class="p-field">
             <label for="nom">Nom</label>
-            <input id="nom" type="text" [(ngModel)]="selectedUser.nom"/>
+            <input id="nom" type="text" [(ngModel)]="selectedUser.name"/>
         </div>
        
         <div class="p-field">
@@ -178,19 +178,19 @@
         </div>
         <div class="p-field">
             <label for="telephone">Téléphone</label>
-            <input id="telephone" type="text" [(ngModel)]="selectedUser.telephone"/>
+            <input id="telephone" type="text" [(ngModel)]="selectedUser.phone"/>
         </div>
         <div class="p-field">
             <label for="instagram">Lien instagram</label>
-            <input id="instagram" type="text" [(ngModel)]="selectedUser.instagram"/>
+            <input id="instagram" type="text" [(ngModel)]="selectedUser.acountLink"/>
         </div>
         <div class="p-field">
             <label for="email">Email</label>
             <input id="email" type="text" [(ngModel)]="selectedUser.email"/>
         </div>
         <div class="p-field">
-            <label for="motdepasse">Mot de passe</label>
-            <input id="motdepasse" type="text" [(ngModel)]="selectedUser.motdepasse"/>
+            <label for="password">Mot de passe</label>
+            <input id="password" type="text" [(ngModel)]="selectedUser.password"/>
         </div>
     </div>
     <p-footer>
@@ -216,7 +216,7 @@
         <!-- Champ pour le nom -->
         <div class="p-field">
             <label for="nom">Nom</label>
-            <input id="nom" type="text" [(ngModel)]="newUser.nom"/>
+            <input id="nom" type="text" [(ngModel)]="newUser.name"/>
         </div>
 
         <!-- Champ pour le prénom -->
@@ -234,13 +234,13 @@
         <!-- Champ pour le téléphone -->
         <div class="p-field">
             <label for="telephone">Téléphone</label>
-            <input id="telephone" type="text" [(ngModel)]="newUser.telephone"/>
+            <input id="telephone" type="text" [(ngModel)]="newUser.phone"/>
         </div>
 
         <!-- Champ pour le lien Instagram -->
         <div class="p-field">
             <label for="instagram">Instagram</label>
-            <input id="instagram" type="text" [(ngModel)]="newUser.instagram"/>
+            <input id="instagram" type="text" [(ngModel)]="newUser.acountLink"/>
         </div>
 
         <!-- Champ pour l'email -->
@@ -252,7 +252,7 @@
         <!-- Champ pour le mot de passe -->
         <div class="p-field">
             <label for="motdepasse">Mot de Passe</label>
-            <input id="motdepasse" type="password" [(ngModel)]="newUser.motdepasse"/>
+            <input id="motdepasse" type="password" [(ngModel)]="newUser.password"/>
             <button type="button" pButton label="Générer le mot de passe" icon="pi pi-key" (click)="generatePassword()"></button>
         </div>
 

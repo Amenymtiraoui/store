@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { SelectItem } from 'primeng/api';
 import { DropdownModule } from 'primeng/dropdown';
 import { UserService } from '../user.service';
+import { InstagrameursService } from '../services/instagrameurs.service';
 
 @Component({
   selector: 'app-instagrammeurs',
@@ -32,10 +33,11 @@ export class InstagrammeursComponent {
     adresse: '',
     telephone: '',
     instagram: '',
+    password: ''
   };
   statuses: SelectItem[] = [
-    { label: 'Actif', value: 'actif' },
-    { label: 'Inactif', value: 'inactif' },
+    { label: 'Actif', value: 'ACTIVE' },
+    { label: 'Inactif', value: 'PENDING' },
     { label: 'Suspendu', value: 'suspendu' },
     { label: 'Bloqué', value: 'bloqué' },
     { label: 'En attente de suppression', value: 'en_attente_de_suppression' }
@@ -70,106 +72,107 @@ export class InstagrammeursComponent {
   }
 
 
-  users : any =[
-    {
-      id: 1,
-      nom: 'Ben Ali',
-      prenom: 'Khaled',
-      adresse:  '75 Rue des Palmiers, Sousse, Tunisie',
-      telephone: '+216 71 234 567',
-      instagram: 'https://instagram.com/khaledbenali',
-      email:  'khaled.benali@example.com',
-      motdepasse: 'password123', 
-      statut:'actif'
-    },
-    {
-      id: 2,
-      nom: 'Jaziri',
-      prenom: 'Amira',
-      adresse: '25 Avenue Habib Bourguiba, Sfax, Tunisie',
-      telephone: '+216 74 567 890',
-      instagram: 'https://instagram.com/amirajaziri',
-      email: 'amira.jaziri@example.com',
-      motdepasse: 'securePass456',      statut:'suspendu'
+  users:any[]=[];
+  // users : any =[
+  //   {
+  //     id: 1,
+  //     nom: 'Ben Ali',
+  //     prenom: 'Khaled',
+  //     adresse:  '75 Rue des Palmiers, Sousse, Tunisie',
+  //     telephone: '+216 71 234 567',
+  //     instagram: 'https://instagram.com/khaledbenali',
+  //     email:  'khaled.benali@example.com',
+  //     motdepasse: 'password123', 
+  //     statut:'actif'
+  //   },
+  //   {
+  //     id: 2,
+  //     nom: 'Jaziri',
+  //     prenom: 'Amira',
+  //     adresse: '25 Avenue Habib Bourguiba, Sfax, Tunisie',
+  //     telephone: '+216 74 567 890',
+  //     instagram: 'https://instagram.com/amirajaziri',
+  //     email: 'amira.jaziri@example.com',
+  //     motdepasse: 'securePass456',      statut:'suspendu'
 
-    },
-    {
-      id: 3,
-      nom: 'Hadad',
-      prenom: 'Rami',
-      adresse:  '50 Boulevard de la République, Bizerte, Tunisie',
-      telephone:  '+216 72 345 678',
-      instagram: 'https://instagram.com/ramihaddad',
-      email:'rami.haddad@example.com',
-      motdepasse: 'password789',
-      statut:'suspendu'
+  //   },
+  //   {
+  //     id: 3,
+  //     nom: 'Hadad',
+  //     prenom: 'Rami',
+  //     adresse:  '50 Boulevard de la République, Bizerte, Tunisie',
+  //     telephone:  '+216 72 345 678',
+  //     instagram: 'https://instagram.com/ramihaddad',
+  //     email:'rami.haddad@example.com',
+  //     motdepasse: 'password789',
+  //     statut:'suspendu'
 
-    },
-    {
-      id: 4,
-      nom: 'Sghaier',
-      prenom: 'Sofia',
-      adresse: '10 Rue de la Liberté, Tunis, Tunisie',
-      telephone: '+216 73 456 789',
-      instagram:'https://instagram.com/sofiasghaier',
-      email: 'sofia.sghaier@example.com',
-      motdepasse: 'myPass123',
-      statut:'en_attente_de_suppression'
+  //   },
+  //   {
+  //     id: 4,
+  //     nom: 'Sghaier',
+  //     prenom: 'Sofia',
+  //     adresse: '10 Rue de la Liberté, Tunis, Tunisie',
+  //     telephone: '+216 73 456 789',
+  //     instagram:'https://instagram.com/sofiasghaier',
+  //     email: 'sofia.sghaier@example.com',
+  //     motdepasse: 'myPass123',
+  //     statut:'en_attente_de_suppression'
 
-    },
-    {
-      id: 5,
-      nom: 'Mghirbi',
-      prenom: 'Sami',
-      adresse: '12 Rue de la Gare, Monastir, Tunisie',
-      telephone: '+216 73 567 890',
-      instagram: 'https://instagram.com/samimghirbi',
-      email: 'sami.mghirbi@example.com',
-      motdepasse: 'samiPass789',
-      statut:'actif'
+  //   },
+  //   {
+  //     id: 5,
+  //     nom: 'Mghirbi',
+  //     prenom: 'Sami',
+  //     adresse: '12 Rue de la Gare, Monastir, Tunisie',
+  //     telephone: '+216 73 567 890',
+  //     instagram: 'https://instagram.com/samimghirbi',
+  //     email: 'sami.mghirbi@example.com',
+  //     motdepasse: 'samiPass789',
+  //     statut:'actif'
 
-    },
-    {
-      id: 6,
-      nom: 'Ghani',
-      prenom: 'Yasmine',
-      adresse: '85 Avenue de la Liberté, La Marsa, Tunisie',
-      telephone: '+216 71 345 678',
-      instagram: 'https://instagram.com/yasmineghani',
-      email: 'yasmine.ghani@example.com',
-      motdepasse: 'yasminePass456',
-      statut:'actif'
+  //   },
+  //   {
+  //     id: 6,
+  //     nom: 'Ghani',
+  //     prenom: 'Yasmine',
+  //     adresse: '85 Avenue de la Liberté, La Marsa, Tunisie',
+  //     telephone: '+216 71 345 678',
+  //     instagram: 'https://instagram.com/yasmineghani',
+  //     email: 'yasmine.ghani@example.com',
+  //     motdepasse: 'yasminePass456',
+  //     statut:'actif'
 
-    },
-    {
-      id: 7,
-      nom: 'Roussi',
-      prenom: 'Amir',
-      adresse: '22 Rue de l’Indépendance, Gabès, Tunisie',
-      telephone: '+216 75 456 789',
-      instagram: 'https://instagram.com/amirroussi',
-      email: 'amir.roussi@example.com',
-      motdepasse: 'amirPass123',
-      statut:'actif'
+  //   },
+  //   {
+  //     id: 7,
+  //     nom: 'Roussi',
+  //     prenom: 'Amir',
+  //     adresse: '22 Rue de l’Indépendance, Gabès, Tunisie',
+  //     telephone: '+216 75 456 789',
+  //     instagram: 'https://instagram.com/amirroussi',
+  //     email: 'amir.roussi@example.com',
+  //     motdepasse: 'amirPass123',
+  //     statut:'actif'
 
-    },
-    {
-      id: 8,
-      nom: 'Fekih',
-      prenom: 'Leila',
-      adresse: '30 Avenue Bourguiba, Nabeul, Tunisie',
-      telephone: '+216 72 567 890',
-      instagram: 'https://instagram.com/leilafekih',
-      email: 'leila.fekih@example.com',
-      motdepasse: 'leilaPass789',
-      statut:'actif'
+  //   },
+  //   {
+  //     id: 8,
+  //     nom: 'Fekih',
+  //     prenom: 'Leila',
+  //     adresse: '30 Avenue Bourguiba, Nabeul, Tunisie',
+  //     telephone: '+216 72 567 890',
+  //     instagram: 'https://instagram.com/leilafekih',
+  //     email: 'leila.fekih@example.com',
+  //     motdepasse: 'leilaPass789',
+  //     statut:'actif'
 
-    }
-  ];
+  //   }
+  // ];
   initialValue: any[] = [];
   isSorted: boolean = false;
 
-  constructor(private confirmationService: ConfirmationService) {}
+  constructor(private confirmationService: ConfirmationService, private instagrameursService : InstagrameursService) {}
  
   filteredUsers: any[] = [];
 //   applyFilters() {
@@ -186,17 +189,19 @@ export class InstagrammeursComponent {
 
   ngOnInit() {
     this.initialValue = [...this.users];
-  
+    this.instagrameursService.getListInstagrammeurs().subscribe((res:any)=>{
+      this.users =  res.body
+    });
   }
 
   fUsers():any[]
   {
     return this.users.filter((user: any) => {
       return (
-          (this.filterNom ? user.nom.toUpperCase().includes(this.filterNom.toUpperCase() ): true) &&
-          (this.selectedStatus ? user.statut.toUpperCase().includes(this.selectedStatus?.value.toUpperCase() ): true) &&
+          (this.filterNom ? user.name.toUpperCase().includes(this.filterNom.toUpperCase() ): true) &&
+          (this.selectedStatus ? user.status.toUpperCase().includes(this.selectedStatus?.value.toUpperCase() ): true) &&
           (this.filterPrenom.toUpperCase() ? user.prenom.toUpperCase() .includes(this.filterPrenom.toUpperCase() ): true) &&
-          (this.filterTelephone? user.telephone.trim().replace(/\s+/g, '').includes(this.filterTelephone.trim().replace(/\s+/g, '')) : true) &&
+          (this.filterTelephone? user.phone.trim().replace(/\s+/g, '').includes(this.filterTelephone.trim().replace(/\s+/g, '')) : true) &&
           (this.filterEmail.toUpperCase() ? user.email.toUpperCase().includes(this.filterEmail.toUpperCase() ) : true)
       );
     });
@@ -285,11 +290,26 @@ export class InstagrammeursComponent {
   }
 
   addUser(): void {
-    const newId = Math.max(...this.users.map((user: any) => user.id)) + 1;
-    const newUserToAdd = { ...this.newUser, id: newId };
-    this.users.push(newUserToAdd);
-    this.resetNewUser();
+   
+
+    // const newId = Math.max(...this.users.map((user: any) => user.id)) + 1;
+    const newUserToAdd = { ...this.newUser, role: "provider-intern" };
+    // this.users.push(newUserToAdd);
+
+    // const data: any = {
+    //   "name": this.newUser.name + '' + this.newUser.prenom,
+    //   "phone" : this.newUser.phone,
+    //   "email" : this.newUser.email,
+    //   "password" : this.newUser.password,
+    //   "acountLink": this.newUser.acountLink,
+    //   "street": this.newUser.adresse,
+    //   "role": "provider-intern"
+    // }
+    this.instagrameursService.add(newUserToAdd).subscribe((res:any)=>{
+      console.log(res)
+           this.resetNewUser();
     this.addDialogVisible = false;
+    })
   }
 
   cancelAdd(): void {
@@ -373,10 +393,42 @@ export class InstagrammeursComponent {
     } else {
       console.log(`Utilisateur avec l'ID ${userId} non trouvé.`);
     }
+
+
+    // Appeler le service pour récupérer les détails de l'utilisateur
+    // this.instagrameursService.edit(userId,this.selectedUser).subscribe((res: any) => {
+    //   this.selectedUser = res.body; // Assigner les données de l'utilisateur à éditer
+    //   if (this.selectedUser) {
+    //     console.log('Utilisateur à éditer:', this.selectedUser);
+  
+    //     // Ouvrir le dialogue d'édition
+    //   } else {
+    //     console.log(`Utilisateur avec l'ID ${userId} non trouvé.`);
+    //   }
+    // }, (error: any) => {
+    //   console.error('Erreur lors de la récupération de l\'utilisateur:', error);
+    // });
   }
+  
 
   saveEdit(): void {
     if (this.selectedUser && this.selectedUser.id) {
+
+      this.instagrameursService.edit(this.selectedUser.id,this.selectedUser).subscribe((res: any) => {
+        this.selectedUser = res.body; // Assigner les données de l'utilisateur à éditer
+        if (this.selectedUser) {
+          console.log('Utilisateur à éditer:', this.selectedUser);
+    
+          // Ouvrir le dialogue d'édition
+          this.editDialogVisible = true; 
+        } else {
+          console.log(`Utilisateur avec l'ID ${this.selectedUser.id} non trouvé.`);
+        }
+      }, (error: any) => {
+        console.error('Erreur lors de la récupération de l\'utilisateur:', error);
+      });
+
+
       const index = this.users.findIndex((user:any) => user.id === this.selectedUser.id);
       if (index !== -1) {
         this.users[index] = { ...this.selectedUser };
